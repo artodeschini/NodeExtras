@@ -16,7 +16,7 @@ app.use(express.json());
 // nomear os arquivos
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, 'uploads/'); // obs devido ao .gitignore talvez seja necessario criar essa pasta
     },
     filename: function(res, file, cb) {
         //cb(null, file.originalname); nome original do arquivo
