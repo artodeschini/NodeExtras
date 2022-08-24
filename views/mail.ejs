@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envio de email</title>
+</head>
+<body>
+    <h1>Envio de emails com Node</h1>
+    <p>
+        Utiliza <a href="https://mailtrap.io/">mailtrap.io</a> para realizar fake de envio de email.
+    </p>
+    <form method="post" action="/email">
+        <label for="para">Para: *</label>
+        <br>
+        <input type="text" name="para" id="para" required>
+        <br>
+        <label for="titulo">Titulo do Email: *</label>
+        <br>
+        <input type="text" name="titulo" id="titulo" required>
+        <br>
+        <label for="conteudo">Conteudo: *</label>
+        <br>
+        <textarea name="conteudo" id="conteudo" required></textarea>
+        <br>
+        <input type="submit" value="Enviar" />
+    </form>
+    <a href="/">Voltar</a>
+</body>
+</html>
