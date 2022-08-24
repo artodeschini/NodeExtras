@@ -3,6 +3,7 @@ const app = express();
 const multer = require('multer');
 const path = require('path');
 const mailer = require('nodemailer');
+const pdf = require('html-pdf');
 
 // static resource
 app.use(express.static('public'));
@@ -32,16 +33,6 @@ const upload = multer({ storage });
 
 // configuracao do transport smtp para envio de email 
 const transporter = mailer.createTransport({
-    // guia para configurar https://kinsta.com/pt/blog/servidor-smtp-gmail/
-    // host: 'smtp.gmail.com',
-    // port: 587,
-    // secure: false,
-    // auth: {
-    //     user: 'artodeschini@gmail.com',
-    //     pass: 'abcABC123'
-    // }
-
-    //host: 'smtp://smtp.mailtrap.io',
     host: 'smtp.mailtrap.io',
     port: 2525,
     auth: {
@@ -83,6 +74,27 @@ app.post("/email", (req, res) => {
     });
 
     res.render('mail');
+});
+
+app.get("/pdf", (req, res) => {
+    res.render('htmltopdf', {'html': ''});
+});
+
+app.post("/pdf", (req, res) => {
+    const html = req.body.html;
+
+    pdf.create(html, {}).toFile('./pdfs/' +
+        Date.now() + ".pdf", (err, res) => {
+            if (err) {
+                console.log('um erro aconteceu');
+                console.log(err);
+            } else {
+                console.log(res);
+            }
+        }
+    )
+
+    res.render('htmltopdf', {'html': html});
 });
 
 app.listen(8080, () => {

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML > PDF</title>
+</head>
+<body>
+    <h1>HTML to PDF</h1>
+
+    <form method="post" action="/pdf">
+        <label for="body">HTML que irá gerar o PDF</label>
+        <br>
+        <textarea id="html" placeholder="Gere um html" 
+            name="html"></textarea>
+        <br>
+        <input type="submit" value="Enviar" />
+    </form>
+    <div id="content-body" style="display: none">
+        <%= html %>
+    </div>
+    
+</body>
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+    language: 'pt_BR',
+    selector: 'textarea#html',
+    plugins: 'advlist, autolink link image lists print preview hr searchreplace wordcaount fullscreen insertdatetime media savve table paste emoticos',
+    init_instance_callback: () => {
+        tinymce.get('html').setContent($('#content-body').html())
+    }
+});
+    
+</script>
+</html>
